@@ -92,10 +92,35 @@ function removeSound(key, button) {
 
   button.classList.remove("playing");
 }
-
+const clearToggle = document.getElementById("clear-toggle")
 const pauseToggle = document.getElementById("pause-toggle")
+const resumeToggle = document.getElementById("resume-toggle")
+
+clearToggle.addEventListener("click", () => {
+  if (playingSounds.size < 1) {
+    alert("The ambience is not set yet.");
+    return;
+  }
+
+  playingSounds.forEach((playingSound, _) => {
+    playingSound.audio.pause();
+  });
+
+  playingSounds.clear();
+
+  // Removing CSS
+  for(let soundButton of soundButtons) {
+    soundButton.classList.remove("playing");
+  }
+
+  clearToggle.classList.remove("clear");
+  pauseToggle.classList.remove("pause");
+  resumeToggle.classList.remove("resume");
+});
+
 pauseToggle.addEventListener("click", () => {
   if (playingSounds.size < 1) {
+    alert("The ambience is not set yet.");
     return;
   }
 
@@ -112,9 +137,9 @@ pauseToggle.addEventListener("click", () => {
   resumeToggle.classList.add("resume");
 });
 
-const resumeToggle = document.getElementById("resume-toggle")
 resumeToggle.addEventListener("click", () => {
   if (playingSounds.size < 1) {
+    alert("The ambience is not set yet.");
     return;
   }
 
@@ -132,15 +157,15 @@ resumeToggle.addEventListener("click", () => {
 });
 
 const soundButtons = document.getElementsByClassName("sound-button");
-for (let i = 0; i < soundButtons.length; i++) {
-  const button = soundButtons.item(i);
-  button.addEventListener("click", () => {
-    const key = button.childNodes[0].nodeValue.toLowerCase();
+for (let soundButton of soundButtons) {
+  soundButton.addEventListener("click", () => {
+    const key = soundButton.childNodes[0].nodeValue.toLowerCase(); // Gets only the sound title text, excluding the emoji span.
 
     // Removing sound
     if (playingSounds.has(key)) {
-      removeSound(key, button);
+      removeSound(key, soundButton);
       if (playingSounds.size < 1) {
+        clearToggle.classList.remove("clear");
         pauseToggle.classList.remove("pause");
         resumeToggle.classList.remove("resume");
       }
@@ -148,8 +173,9 @@ for (let i = 0; i < soundButtons.length; i++) {
     }
 
     // Playing sound
-    playSound(key, button);
+    playSound(key, soundButton);
     if (!isPaused() && playingSounds.size >= 1) {
+      clearToggle.classList.add("clear");
       pauseToggle.classList.add("pause");
     }
   });
