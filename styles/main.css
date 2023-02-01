@@ -8,6 +8,7 @@
   --button-border-radius: 0.5em;
   /* toggle */
   --idle-toggle-button-color: #848482;
+  --clear-toggle-button-color: #B81365;
   --pause-toggle-button-color: #D1462F;
   --resume-toggle-button-color: #FFB200
   ;
@@ -79,6 +80,10 @@ body {
   border-color: var(--sound-button-color);
   border-radius: var(--button-border-radius);
   background-color: var(--idle-toggle-button-color);
+}
+
+.toggle-button.clear {
+  background-color: var(--clear-toggle-button-color);
 }
 
 .toggle-button.pause {
