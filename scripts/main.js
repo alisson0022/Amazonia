@@ -43,6 +43,21 @@ soundMap.forEach((sound, _) => {
 */
 const playingSounds = new Map();
 
+function isPaused() {
+  if (playingSounds.size < 1) {
+    return false;
+  }
+
+  let isPaused = true;
+  playingSounds.forEach((value, _) => {
+    if (!value.audio.paused) {
+      isPaused = false;
+      return;
+    }
+  });
+  return isPaused;
+}
+
 function playSound(key, button) {
   if (!soundMap.has(key)) {
     alert(`The sound ${key} you're trying to play doesn't exist.`);
@@ -56,7 +71,10 @@ function playSound(key, button) {
 
   const sound = soundMap.get(key);
   const audio = new Audio(sound.file);
-  audio.play();
+  
+  if (!isPaused()) {
+    audio.play();
+  }
 
   playingSounds.set(key, {
     "sound": sound,
@@ -75,25 +93,23 @@ function removeSound(key, button) {
   button.classList.remove("playing");
 }
 
-function pause() {
-  playingSounds.forEach((playingSound, key) => {
-    playingSound.audio.pause();
-  });
-}
-
-function resume() {
-  playingSounds.forEach((playingSound, key) => {
-    playingSound.audio.play();
-  });
-}
-
 const pauseToggle = document.getElementById("pause-toggle")
 pauseToggle.addEventListener("click", () => {
   if (playingSounds.size < 1) {
     return;
   }
 
-  pause();
+  if (isPaused()) {
+    alert("The ambience is already paused.");
+    return;
+  }
+
+  playingSounds.forEach((playingSound, _) => {
+    playingSound.audio.pause();
+  });
+
+  pauseToggle.classList.remove("pause");
+  resumeToggle.classList.add("resume");
 });
 
 const resumeToggle = document.getElementById("resume-toggle")
@@ -102,7 +118,17 @@ resumeToggle.addEventListener("click", () => {
     return;
   }
 
-  resume();
+  if (!isPaused()) {
+    alert("The ambience is not paused.");
+    return;
+  }
+  
+  playingSounds.forEach((playingSound, _) => {
+    playingSound.audio.play();
+  });
+
+  pauseToggle.classList.add("pause");
+  resumeToggle.classList.remove("resume");
 });
 
 const soundButtons = document.getElementsByClassName("sound-button");
@@ -123,9 +149,8 @@ for (let i = 0; i < soundButtons.length; i++) {
 
     // Playing sound
     playSound(key, button);
-    if (playingSounds.size === 1) {
+    if (!isPaused() && playingSounds.size >= 1) {
       pauseToggle.classList.add("pause");
-      resumeToggle.classList.add("resume");
     }
   });
 }
