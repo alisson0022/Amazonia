@@ -1,0 +1,91 @@
+
+/* Variables */
+:root {
+  --background-color: #4A6E4C;
+  /* button */
+  --sound-button-color: #403242;
+  --sound-button-playing-color: #5FAD41;
+  --button-border-radius: 0.5em;
+  /* toggle */
+  --idle-toggle-button-color: #848482;
+  --pause-toggle-button-color: #D1462F;
+  --resume-toggle-button-color: #FFB200
+  ;
+}
+
+/* 
+Color for when hovering playing sound button - #D1462F
+*/
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0; /* Removes the vertical scroll bar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--background-color);
+}
+
+#container {/* or try 50% */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1em;
+}
+
+/* sounds */
+
+#available-sounds {
+  display: flex;
+  gap: 0.2em;
+  padding: 0.6em;
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--sound-button-color);
+  border-radius: var(--button-border-radius);
+}
+
+.button {
+  color: beige;
+  padding: 1em;
+  border: none;
+  border-radius: var(--button-border-radius);
+}
+
+.button:hover {
+  background-color: beige;
+  color: black;
+}
+
+.sound-button {
+  background-color: var(--sound-button-color);
+}
+
+.sound-button.playing {
+  background-color: var(--sound-button-playing-color);
+}
+
+.sound-button.playing:hover {
+  background-color: var(--pause-toggle-color);
+}
+
+/* toggles */
+.toggle-button {
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--sound-button-color);
+  border-radius: var(--button-border-radius);
+  background-color: var(--idle-toggle-button-color);
+}
+
+.toggle-button.pause {
+  background-color: var(--pause-toggle-button-color);
+}
+
+.toggle-button.resume {
+  background-color: var(--resume-toggle-button-color);
+}
+
