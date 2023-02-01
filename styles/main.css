@@ -30,11 +30,21 @@ body {
   background-color: var(--background-color);
 }
 
+/* Font applying */
+body, button {
+  font-family: 'Montserrat', serif;
+}
+
 #container {/* or try 50% */
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 1em;
+}
+
+/* logo */
+#title {
+  color: beige;
 }
 
 /* sounds */
