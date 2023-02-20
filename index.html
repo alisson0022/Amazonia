@@ -21,7 +21,9 @@
   <!-- Fonts -->
   <link rel="stylesheet"
   href="https://fonts.googleapis.com/css?family=Montserrat">
-</head>
+   <!-- Loading JavaScript -->
+   <script defer src="scripts/main.js"></script> <!-- By using "defer", there's no need to put the script tag at the end of the body tag. For the script will load after the page is parsed...-->
+</head> 
 <body>
   <div id="container">
     <span id="logo-container">
@@ -30,12 +32,10 @@
     </span>
     <div id="available-sounds"></div>
     <div id="toggles">
-      <button id="clear-toggle" class="button toggle-button">Clear</button>
-      <button id="pause-toggle" class="button toggle-button">Pause</button>
-      <button id="resume-toggle" class="button toggle-button">Resume</button>
+      <button id="clear-toggle" class="btn toggle-btn">Clear</button>
+      <button id="pause-toggle" class="btn toggle-btn">Pause</button>
+      <button id="resume-toggle" class="btn toggle-btn">Resume</button>
     </div>
   </div>
-  <!-- Loading JavaScript -->
-  <script src="scripts/main.js"></script>
 </body>
 </html>
