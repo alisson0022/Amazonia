@@ -7,11 +7,12 @@
   --sound-button-playing-color: #5FAD41;
   --button-border-radius: 0.5em;
   /* toggle */
+  --toggles-border-radius: 0.3em;
+  --toggles-background-color: rgba(64, 50, 66, 0.7);
   --idle-toggle-button-color: #848482;
   --clear-toggle-button-color: #B81365;
   --pause-toggle-button-color: #D1462F;
-  --resume-toggle-button-color: #FFB200
-  ;
+  --resume-toggle-button-color: #FFB200;
 }
 
 /* 
@@ -28,6 +29,13 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--background-color);
+  /* Remove selection */
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
 }
 
 /* Font applying */
@@ -50,41 +58,57 @@ body, button {
 /* sounds */
 
 #available-sounds {
+  /* layout*/
+  max-width: 85%;
   display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
   gap: 0.2em;
-  padding: 0.6em;
+  padding: 0.4em;
+  /* border */
   border-style: solid;
   border-width: 1px;
   border-color: var(--sound-button-color);
   border-radius: var(--button-border-radius);
 }
 
-.button {
+.btn {  
   color: beige;
   padding: 1em;
   border: none;
   border-radius: var(--button-border-radius);
 }
 
-.button:hover {
-  background-color: beige;
-  color: black;
-}
-
-.sound-button {
+.sound-btn {
   background-color: var(--sound-button-color);
 }
 
-.sound-button.playing {
+.sound-btn.playing {
   background-color: var(--sound-button-playing-color);
 }
 
-.sound-button.playing:hover {
-  background-color: var(--pause-toggle-color);
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background-color: beige;
+    color: black;
+  }
+  
+  .sound-btn.playing:hover {
+    background-color: var(--pause-toggle-button-color);
+    color: white
+  }
 }
 
 /* toggles */
-.toggle-button {
+
+#toggles {
+  border-radius: var(--toggles-border-radius);
+  background-color: var(--toggles-background-color);
+  padding: 0.6em;
+}
+
+.toggle-btn {
   border-style: solid;
   border-width: 1px;
   border-color: var(--sound-button-color);
@@ -92,15 +116,15 @@ body, button {
   background-color: var(--idle-toggle-button-color);
 }
 
-.toggle-button.clear {
+.toggle-btn.clear {
   background-color: var(--clear-toggle-button-color);
 }
 
-.toggle-button.pause {
+.toggle-btn.pause {
   background-color: var(--pause-toggle-button-color);
 }
 
-.toggle-button.resume {
+.toggle-btn.resume {
   background-color: var(--resume-toggle-button-color);
 }
 

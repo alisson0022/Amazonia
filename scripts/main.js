@@ -26,7 +26,7 @@ const soundMap = new Map(Object.entries(
 soundMap.forEach((sound, _) => {
   const soundButton = document.createElement("button");
   soundButton.textContent = sound.title;
-  soundButton.setAttribute("class", "button sound-button");
+  soundButton.setAttribute("class", "btn sound-btn");
   const emojiSpan = document.createElement("span");
   emojiSpan.textContent = sound.emoji;
   soundButton.appendChild(emojiSpan);
@@ -76,10 +76,7 @@ function playSound(key, button) {
     audio.play();
   }
 
-  playingSounds.set(key, {
-    "sound": sound,
-    "audio": audio
-  })
+  playingSounds.set(key, { sound, audio }) // Short syntax
 
   button.classList.add("playing");
 }
@@ -156,10 +153,12 @@ resumeToggle.addEventListener("click", () => {
   resumeToggle.classList.remove("resume");
 });
 
-const soundButtons = document.getElementsByClassName("sound-button");
+const soundButtons = document.getElementsByClassName("sound-btn");
 for (let soundButton of soundButtons) {
   soundButton.addEventListener("click", () => {
     const key = soundButton.childNodes[0].nodeValue.toLowerCase(); // Gets only the sound title text, excluding the emoji span.
+
+    document.getElementById("container").focus();
 
     // Removing sound
     if (playingSounds.has(key)) {
